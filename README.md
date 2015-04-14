@@ -1,4 +1,4 @@
-# ProgettoChess
+# Chess Fever
 
 By Andrea Dall'Alba & Edoardo Chigini
 
