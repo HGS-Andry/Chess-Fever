@@ -1,9 +1,7 @@
-/**
- * 
- */
 package model;
 
 /**
+ * Piece Color
  * @author Andrea
  *
  */

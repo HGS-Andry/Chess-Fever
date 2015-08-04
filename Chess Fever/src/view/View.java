@@ -1,5 +1,8 @@
 package view;
 
-public class View {
+import controller.*;
 
+public interface View {
+	Controller getController();
+	
 }
