@@ -16,6 +16,6 @@ public class properties {
 	
 	//Font
 	public static Font bigFont = new Font("Tahoma", Font.BOLD, 25);
-	public static Font titleFont = new Font("Arial", Font.PLAIN, 40);
+	public static Font titleFont = new Font("Tahoma", Font.PLAIN, 40);
 	
 }

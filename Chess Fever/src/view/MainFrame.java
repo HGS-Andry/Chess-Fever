@@ -1,8 +1,11 @@
-package ChessFever;
+package view;
 
 import java.awt.BorderLayout;
 
 import javax.swing.*;
+
+import ChessFever.ChessFever;
+import ChessFever.properties;
 /**
  * Main page of the game, it contains the play button
  * @author Andrea Dall'Alba
@@ -44,10 +47,9 @@ public class MainFrame extends JFrame {
 	}
 
 	private void newGame() {
-		// TODO Auto-generated method stub
-		System.out.println("Do you wanna play? no! LOL!");
 		JFrame gameFrame = new gameFrame();
 		gameFrame.setVisible(true);
+		gameFrame.setLocationRelativeTo(null);
 		ChessFever.mainFrame.setVisible(false);
 	}
 }
