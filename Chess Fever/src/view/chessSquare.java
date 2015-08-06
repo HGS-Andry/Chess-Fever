@@ -10,28 +10,38 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
+import ChessFever.properties;
+import model.Coordinates;
+
 public class chessSquare extends JComponent implements MouseListener {
 
 	private static final long serialVersionUID = -5944937482184311753L;
 	
 	private boolean mouseEntered =false;; 	
 	private model.Color color;
-	public int r,c;  //TODO da cambiare, solo per test
+	private Coordinates squareCoordinate;
 	private ArrayList<ActionListener> listeners = new ArrayList<ActionListener>();
 	public chessSquare(model.Color color,int r, int c){
 		super();
 		this.color=color;
-		this.r=r;
-		this.c=c;
+		squareCoordinate= new Coordinates(r,c);
 		enableInputMethods(true);   
 		addMouseListener(this);
+	}
+	
+	/**
+	 * Return the {@link Coordinates} of the square
+	 * @return
+	 */
+	public Coordinates getCoordinates(){
+		return squareCoordinate;
 	}
 	
 	//Method to paint the component
 	@Override
 	 public void paintComponent(Graphics graphics)
 	  {
-		Image squareImage = new ImageIcon("Images/square.png").getImage();
+		Image squareImage = new ImageIcon(properties.squareImagePath).getImage();
 		Graphics2D paintGraphics = (Graphics2D) graphics;
 		paintGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		paintGraphics.drawImage(squareImage, 0, 0, this.getWidth(), this.getHeight(),color.ordinal()*256,0,color.ordinal()*256+256,256, null);

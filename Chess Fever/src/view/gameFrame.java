@@ -6,21 +6,35 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import model.Model;
+import model.Piece;
+import model.chessModel;
 import ChessFever.ChessFever;
 import ChessFever.properties;
 import controller.Controller;
+import controller.chessController;
 
-public class gameFrame extends JFrame implements View {
+public class gameFrame extends JFrame implements view.View {
 
 	private static final long serialVersionUID = -3477430063014483640L;
 	
 	private int chessBoardSize=800;
+	
+	private Model gameModel;
+	private Controller gameController;
 
+	private JPanel piecesPlane;
+	
 	public gameFrame() {
 		setTitle("Chess Fever - new Game");
 		setSize(1280, 1024);
+		
+		//Initialize the Game
+		gameModel= new chessModel();
+		gameController=new chessController(gameModel,(View)this);
 		
 		//mainPanel
 		JPanel mainPanel =new JPanel();
@@ -37,12 +51,19 @@ public class gameFrame extends JFrame implements View {
 		c.gridx=0;
 		mainPanel.add(player1Label,c);
 		
-		//chess board panel
+		//chess board panel. A layered plane with a chess made of buttons and a glass plane were pieces are printed
+		JLayeredPane layerdChessPlane =new JLayeredPane();
+		layerdChessPlane.setSize(chessBoardSize, chessBoardSize);
+		layerdChessPlane.setMinimumSize(layerdChessPlane.getSize());
+		layerdChessPlane.setPreferredSize(layerdChessPlane.getSize());
 		JPanel chessBoard= createChessBoard();
+		piecesPlane = createPiecesPlane();
 		c.weightx=1;
 		c.weighty=1;
 		c.gridx=1;
-		mainPanel.add(chessBoard,c);
+		layerdChessPlane.add(chessBoard,Integer.valueOf(1));
+		layerdChessPlane.add(piecesPlane,Integer.valueOf(2));
+		mainPanel.add(layerdChessPlane,c);
 
 		//Player 2 panel TODO replace the label with player 2 panel
 		JLabel player2Label=new JLabel("Player 2");
@@ -57,6 +78,8 @@ public class gameFrame extends JFrame implements View {
 		
 		add(mainPanel);
 		
+		repaint();
+		
 		//When close the window it set visible the main page
 		addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing (java.awt.event.WindowEvent evt){
@@ -67,25 +90,28 @@ public class gameFrame extends JFrame implements View {
 		
 	}
 	
+	//Create a glass panel 
+	private JPanel createPiecesPlane() {
+		JPanel glass = new JPanel();
+	    glass.setOpaque(true); // Set to true to see it
+	    glass.setSize(chessBoardSize, chessBoardSize);
+	    glass.setLocation(0, 0);	    
+		return glass;
+	}
+
 	//Create a chess Board already initialized
 	private JPanel createChessBoard() {
-		// TODO
 		JPanel chess=new JPanel();
 		chess.setSize(chessBoardSize, chessBoardSize);
 		chess.setMinimumSize(chess.getSize());
 		chess.setPreferredSize(chess.getSize());
 		chess.setLayout(null);
-		int c,r;
-		
-		//TODO migliorare la scelta del colore (r+c)pari=bianco, altrimenti nero!
-
-		for (c=0; c<8;c++)
-			for (r = 0; r < 8; r++) {
+		for (int c=0; c<8;c++)
+			for (int r = 0; r < 8; r++) {
 				chessSquare test =new chessSquare((r+c)%2==0?model.Color.WHITE:model.Color.BLACK,r,c);
 				test.setBounds((chessBoardSize/8)*c, (chessBoardSize/8)*r, chessBoardSize/8, chessBoardSize/8);
 				test.addActionListener(action -> bottonePremuto(test));
-				System.out.printf("Bottone %d,%d di colore %d creato\n",c,r,(r+c)%2==0?model.Color.WHITE.ordinal():model.Color.BLACK.ordinal());
-	
+				//System.out.printf("Bottone %d,%d di colore %d creato\n",c,r,(r+c)%2==0?model.Color.WHITE.ordinal():model.Color.BLACK.ordinal()); //DEBUG 
 				chess.add(test);
 			}
 		return chess;
@@ -94,7 +120,7 @@ public class gameFrame extends JFrame implements View {
 	
 
 	private void bottonePremuto(chessSquare bottone) {
-		System.out.printf("Bottone %d,%d di premuto\n",bottone.r,bottone.c);
+		System.out.printf("Bottone %d,%d di premuto\n",bottone.getCoordinates().getXCCoordinate(),bottone.getCoordinates().getYRCoordinate());
 	}
 
 	@Override
@@ -103,4 +129,10 @@ public class gameFrame extends JFrame implements View {
 		return null;
 	}
 
+	@Override
+	public void repaint(){	//TODO completa!
+		//read information from the model
+		Piece [][]chessBoard=gameModel.getConfiguration();
+		
+	}
 }

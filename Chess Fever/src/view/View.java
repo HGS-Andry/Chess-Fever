@@ -3,6 +3,14 @@ package view;
 import controller.*;
 
 public interface View {
-	Controller getController();
+	/**
+	 * Get the used Controller
+	 */
+	public Controller getController();
+	
+	/**
+	 * Apply modifications
+	 */
+	public void repaint();
 	
 }

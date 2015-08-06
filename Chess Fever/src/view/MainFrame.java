@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
 		
 		//Title
 		JLabel titleImage = new JLabel("Title");
-		titleImage.setIcon(new ImageIcon("Images/Title.png"));
+		titleImage.setIcon(new ImageIcon(properties.titleImagePath));
 		titleImage.setLayout( new BorderLayout() );
 		titleImage.setBounds(100, 50, 600, 400);
 		mainPanel.add(titleImage);

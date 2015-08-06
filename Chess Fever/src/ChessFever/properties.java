@@ -18,4 +18,8 @@ public class properties {
 	public static Font bigFont = new Font("Tahoma", Font.BOLD, 25);
 	public static Font titleFont = new Font("Tahoma", Font.PLAIN, 40);
 	
+	//Images Path
+	public static String titleImagePath = "Images/Title.png";
+	public static String piecesImagePath = "Images/pieces.png";
+	public static String squareImagePath = "Images/square.png";
 }
