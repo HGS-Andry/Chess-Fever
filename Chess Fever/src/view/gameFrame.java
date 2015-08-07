@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import model.Coordinates;
 import model.Model;
 import model.Piece;
 import model.chessModel;
@@ -93,7 +94,7 @@ public class gameFrame extends JFrame implements view.View {
 	//Create a glass panel 
 	private JPanel createPiecesPlane() {
 		JPanel glass = new JPanel();
-	    glass.setOpaque(true); // Set to true to see it
+	    glass.setOpaque(false); // Set to true to see it
 	    glass.setSize(chessBoardSize, chessBoardSize);
 	    glass.setLocation(0, 0);	    
 		return glass;
@@ -111,7 +112,7 @@ public class gameFrame extends JFrame implements view.View {
 				chessSquare test =new chessSquare((r+c)%2==0?model.Color.WHITE:model.Color.BLACK,r,c);
 				test.setBounds((chessBoardSize/8)*c, (chessBoardSize/8)*r, chessBoardSize/8, chessBoardSize/8);
 				test.addActionListener(action -> bottonePremuto(test));
-				//System.out.printf("Bottone %d,%d di colore %d creato\n",c,r,(r+c)%2==0?model.Color.WHITE.ordinal():model.Color.BLACK.ordinal()); //DEBUG 
+				System.out.printf("Bottone %d,%d di colore %d creato\n",c,r,(r+c)%2==0?model.Color.WHITE.ordinal():model.Color.BLACK.ordinal()); //DEBUG 
 				chess.add(test);
 			}
 		return chess;
@@ -120,7 +121,7 @@ public class gameFrame extends JFrame implements view.View {
 	
 
 	private void bottonePremuto(chessSquare bottone) {
-		System.out.printf("Bottone %d,%d di premuto\n",bottone.getCoordinates().getXCCoordinate(),bottone.getCoordinates().getYRCoordinate());
+		System.out.printf("Bottone %d,%d premuto\n",bottone.getCoordinates().getXCCoordinate(),bottone.getCoordinates().getYRCoordinate());
 	}
 
 	@Override
@@ -133,6 +134,20 @@ public class gameFrame extends JFrame implements view.View {
 	public void repaint(){	//TODO completa!
 		//read information from the model
 		Piece [][]chessBoard=gameModel.getConfiguration();
+		int index;
+		for (int r = 0; r < 8; r++)
+			for (int c = 0; c < 8; c++) {
+				index = getPieceIndex(chessBoard[r][c]);
+				
+			}
+			
 		
+	}
+
+	private int getPieceIndex(Piece piece) {
+		int index=0;
+		
+		
+		return index;
 	}
 }

@@ -6,5 +6,5 @@ package model;
  *
  */
 public enum Color {
-	BLACK, WHITE
+	 WHITE, BLACK
 }

@@ -44,7 +44,7 @@ public class chessSquare extends JComponent implements MouseListener {
 		Image squareImage = new ImageIcon(properties.squareImagePath).getImage();
 		Graphics2D paintGraphics = (Graphics2D) graphics;
 		paintGraphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		paintGraphics.drawImage(squareImage, 0, 0, this.getWidth(), this.getHeight(),color.ordinal()*256,0,color.ordinal()*256+256,256, null);
+		paintGraphics.drawImage(squareImage, 0, 0, this.getWidth(), this.getHeight(),color.ordinal()*256,0,color.ordinal()*256+256,256, null); //TODO controlla ordinal...
 		//Empathize the selected square
 		if(mouseEntered){
 			paintGraphics.setColor(new Color(0x56FFB400,true));//TODO rifare il colore
